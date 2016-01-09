@@ -32,7 +32,7 @@ class Trainer():
 			print('Vector not found.')
 			sys.exit(1)
 		# Storing vectorized data.
-		np.save(path, self.vectorized)
+		np.save(path, self.vectorized.toarray())
 
 	def storeKmeans(self, path):
 		if not hasattr(self, 'km'):

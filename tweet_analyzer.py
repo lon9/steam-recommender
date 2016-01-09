@@ -5,6 +5,7 @@ import utils
 from sklearn.externals import joblib
 import numpy as np
 import scipy as sp
+import sys
 
 
 class TweetAnalyzer():
@@ -19,7 +20,7 @@ class TweetAnalyzer():
 		# Load vactorizer.
 		self.vectorizer = joblib.load(vectorizerPath)
 		# Load vectorized data.
-		self.vectorized = np.load(vectorizedPath)
+		self.vectorized = sp.sparse.csr.csr_matrix(np.load(vectorizedPath))
 		# Vectorize existing data.
 		self.data = utils.read_data(dataPath)
 
@@ -51,4 +52,5 @@ for line in f:
 
 ta = TweetAnalyzer('data.csv', 'vector.npy', 'kmeans.pkl', 'vectorizer.pkl')
 similar = ta.compare(tweets)
-print(similar)
+for s in similar[:10]:
+	print(s)
